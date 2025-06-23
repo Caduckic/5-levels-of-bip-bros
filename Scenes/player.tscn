@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6ux8rabmdtp2"]
+
+[ext_resource type="Script" uid="uid://dsa81cbogdct5" path="res://Scenes/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="2_cvnsp"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_cvnsp")

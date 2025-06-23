@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfam3g8s1dbeu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qyhgo"]
+lightmap_size_hint = Vector2i(20, 16)
+add_uv2 = true
+size = Vector2(3.7, 2.8)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7ooh4"]
+lightmap_size_hint = Vector2i(77, 52)
+add_uv2 = true
+size = Vector2(15, 10)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3em56"]
+lightmap_size_hint = Vector2i(20, 16)
+add_uv2 = true
+size = Vector2(3.7, 2.8)
+
+[sub_resource type="QuadMesh" id="QuadMesh_bisa2"]
+lightmap_size_hint = Vector2i(20, 14)
+add_uv2 = true
+size = Vector2(3.7, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_4o3f6"]
+lightmap_size_hint = Vector2i(16, 14)
+add_uv2 = true
+size = Vector2(2.8, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v321d"]
+size = Vector3(2.8, 2.5, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_88gup"]
+size = Vector3(0.8, 2.04, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bisa2"]
+size = Vector3(3.7, 2.5, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4o3f6"]
+size = Vector3(2.5, 1.7, 0.2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v321d"]
+top_radius = 0.07
+bottom_radius = 0.1
+height = 0.17
+radial_segments = 32
+
+[node name="RoomModel" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0, 0)
+mesh = SubResource("QuadMesh_qyhgo")
+
+[node name="Outside Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 6.5, 0, 0)
+mesh = SubResource("QuadMesh_7ooh4")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 2.5, 0)
+mesh = SubResource("QuadMesh_3em56")
+
+[node name="Wall Left" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.4, 1.25, 0)
+mesh = SubResource("QuadMesh_bisa2")
+
+[node name="Back Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.25, 1.85)
+mesh = SubResource("QuadMesh_4o3f6")
+
+[node name="Front Wall" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1.92)
+
+[node name="Wall Mesh" type="CSGMesh3D" parent="Front Wall"]
+mesh = SubResource("BoxMesh_v321d")
+
+[node name="Doorway Mesh" type="CSGMesh3D" parent="Front Wall/Wall Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, -0.23, 0)
+operation = 2
+mesh = SubResource("BoxMesh_88gup")
+
+[node name="Right Wall" type="CSGCombiner3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.47, 1.25, 0)
+
+[node name="Wall Mesh" type="CSGMesh3D" parent="Right Wall"]
+mesh = SubResource("BoxMesh_bisa2")
+
+[node name="Window Mesh" type="CSGMesh3D" parent="Right Wall/Wall Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+operation = 2
+mesh = SubResource("BoxMesh_4o3f6")
+
+[node name="Bed" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9170735, 0, 0.87443185)
+
+[node name="Mattress" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 0)
+size = Vector3(0.9, 0.2, 1.9)
+
+[node name="Head" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0.928)
+size = Vector3(0.9, 0.4, 0.04)
+
+[node name="Leg1" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39999998, 0.120000005, -0.9)
+size = Vector3(0.051, 0.24, 0.051)
+
+[node name="Leg2" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, 0.120000005, -0.9)
+size = Vector3(0.051, 0.24, 0.051)
+
+[node name="Leg3" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39999998, 0.120000005, 0.9)
+size = Vector3(0.051, 0.24, 0.051)
+
+[node name="Leg4" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, 0.120000005, 0.9)
+size = Vector3(0.051, 0.24, 0.051)
+
+[node name="Drawer Cabinet" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96538454, 0, -1.5510061)
+
+[node name="Box" type="CSGBox3D" parent="Drawer Cabinet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+size = Vector3(0.8, 0.9, 0.55)
+
+[node name="Bed Table" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18087474, 0, 1.5821556)
+
+[node name="Top" type="CSGBox3D" parent="Bed Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.5, 0.06, 0.5)
+
+[node name="Leg1" type="CSGBox3D" parent="Bed Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.235, 0.2)
+size = Vector3(0.08, 0.47, 0.08)
+
+[node name="Leg2" type="CSGBox3D" parent="Bed Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.235, 0.2)
+size = Vector3(0.08, 0.47, 0.08)
+
+[node name="Leg3" type="CSGBox3D" parent="Bed Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.235, -0.2)
+size = Vector3(0.08, 0.47, 0.08)
+
+[node name="Leg4" type="CSGBox3D" parent="Bed Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.235, -0.2)
+size = Vector3(0.08, 0.47, 0.08)
+
+[node name="Lamp" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.53, 1.65)
+
+[node name="Pole" type="CSGCylinder3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 0.01
+height = 0.2
+
+[node name="Base" type="CSGCylinder3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0058105513, 0)
+radius = 0.06
+height = 0.01
+sides = 20
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23484132, 0)
+mesh = SubResource("CylinderMesh_v321d")
