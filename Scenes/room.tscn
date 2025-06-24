@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="1_88gup"]
 [ext_resource type="Script" uid="uid://cxmh0ji26pwj8" path="res://Scenes/room.gd" id="1_ka7wq"]
 [ext_resource type="LightmapGIData" uid="uid://bar288ho3hy48" path="res://Scenes/room.lmbake" id="2_bisa2"]
-[ext_resource type="PackedScene" uid="uid://c3x8g3u6hb0wv" path="res://Scenes/ui.tscn" id="3_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://c3x8g3u6hb0wv" path="res://Scenes/room_ui.tscn" id="3_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://b6ux8rabmdtp2" path="res://Scenes/player.tscn" id="3_ka7wq"]
 
 [sub_resource type="Environment" id="Environment_88gup"]
@@ -40,4 +40,5 @@ light_data = ExtResource("2_bisa2")
 
 [node name="UI" parent="." instance=ExtResource("3_4o3f6")]
 
+[connection signal="state_entered" from="Player" to="." method="_on_player_state_entered"]
 [connection signal="button_pressed" from="UI" to="." method="_on_ui_button_pressed"]

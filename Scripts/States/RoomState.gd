@@ -18,3 +18,6 @@ func go_down():
 
 func go_up():
 	pass
+
+func action():
+	pass

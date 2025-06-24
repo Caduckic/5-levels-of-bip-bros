@@ -52,3 +52,5 @@ transform = Transform3D(4.371139e-08, -3.821371e-15, -1, -8.742278e-08, -1, 0, -
 
 [node name="Window" type="Marker3D" parent="Markers"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29359752, 0.4886582, -0.6745601)
+
+[connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]

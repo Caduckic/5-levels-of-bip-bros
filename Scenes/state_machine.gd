@@ -1,5 +1,7 @@
 extends Node
 
+signal state_entered(state: String)
+
 @export var initial_state: State
 
 var current_state: State
@@ -37,6 +39,7 @@ func on_child_transition(state: State, new_state_name: String):
 		current_state.Exit()
 	
 	new_state.Enter()
+	state_entered.emit(new_state_name)
 	
 	current_state = new_state
 
@@ -55,3 +58,7 @@ func go_left():
 func go_right():
 	if current_state is RoomState:
 		current_state.go_right()
+
+func action():
+	if current_state is RoomState:
+		current_state.action()

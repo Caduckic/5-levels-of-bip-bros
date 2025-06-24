@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3x8g3u6hb0wv"]
+
+[ext_resource type="Script" uid="uid://cqx0na3okko3p" path="res://Scenes/room_ui.gd" id="1_fyqef"]
+
+[node name="RoomUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fyqef")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Up" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.5
+offset_right = 26.5
+offset_bottom = 31.0
+grow_horizontal = 2
+focus_mode = 0
+text = "Up"
+
+[node name="ForwardsMarker" type="Marker3D" parent="Control/Up"]
+
+[node name="UnderBedMarker" type="Marker3D" parent="Control/Up"]
+transform = Transform3D(4.371139e-08, -3.821371e-15, -1, -8.742278e-08, -1, 0, -1, 8.742278e-08, -4.371139e-08, -0.7680149, -0.6780522, -0.68167734)
+
+[node name="TableMarker" type="Marker3D" parent="Control/Up"]
+transform = Transform3D(-3.9205577e-08, -0.4421948, 0.8969191, -1.9328947e-08, 0.8969191, 0.4421948, -1, 0, -4.3711392e-08, -0.17422211, 0.09042597, 0)
+
+[node name="WindowMarker" type="Marker3D" parent="Control/Up"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29359752, 0.4886582, -0.6745601)
+
+[node name="Down" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -31.0
+offset_right = 26.5
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "Down"
+
+[node name="Left" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 38.0
+offset_bottom = 15.5
+grow_vertical = 2
+focus_mode = 0
+text = "Left"
+
+[node name="Right" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "Right
+"
+
+[node name="Action" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -15.5
+offset_right = 29.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Action"
+
+[connection signal="pressed" from="Control/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Control/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="Control/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Control/Action" to="." method="_on_action_pressed"]
