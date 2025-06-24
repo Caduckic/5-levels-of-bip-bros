@@ -1,11 +1,19 @@
-extends State
+extends RoomState
+class_name ForwardState
 
+# go to window
+func go_right():
+	transitioned.emit(self, "window")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+# go to table
+func go_left():
+	transitioned.emit(self, "table")
 
+# go to under bed
+func go_down():
+	transitioned.emit(self, "underbed")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+# begin handheld game
+func go_up():
 	pass
+	#transitioned.emit(self, "play")

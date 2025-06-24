@@ -39,3 +39,19 @@ func on_child_transition(state: State, new_state_name: String):
 	new_state.Enter()
 	
 	current_state = new_state
+
+func go_up():
+	if current_state is RoomState:
+		current_state.go_up()
+
+func go_down():
+	if current_state is RoomState:
+		current_state.go_down()
+
+func go_left():
+	if current_state is RoomState:
+		current_state.go_left()
+
+func go_right():
+	if current_state is RoomState:
+		current_state.go_right()
