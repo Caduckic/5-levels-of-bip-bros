@@ -21,7 +21,7 @@ func set_ui_underbed():
 	$Control/Left.visible = false
 	$Control/Right.visible = false
 	$Control/Action.visible = true # TODO change if holding handheld
-
+   
 func set_ui_window():
 	$Control/Up.visible = false
 	$Control/Down.visible = true
@@ -36,16 +36,26 @@ func set_ui_table():
 	$Control/Right.visible = true
 	$Control/Action.visible = true
 
+func set_ui_moving():
+	$Control/Up.visible = false
+	$Control/Down.visible = false
+	$Control/Left.visible = false
+	$Control/Right.visible = false
+	$Control/Action.visible = false
+
 # sets the button layout per state
 func set_ui_room_state(state: String):
-	if state == "forward":
+	if state.to_lower() == "forward":
 		set_ui_forward()
-	if state == "table":
+	if state.to_lower() == "table":
 		set_ui_table()
-	if state == "underbed":
+	if state.to_lower() == "underbed":
 		set_ui_underbed()
-	if state == "window":
+	if state.to_lower() == "window":
 		set_ui_window()
+	if state.to_lower() == "moving":
+		set_ui_moving()
+		
 
 func _on_left_pressed() -> void:
 	button_pressed.emit("left")

@@ -31,17 +31,6 @@ grow_horizontal = 2
 focus_mode = 0
 text = "Up"
 
-[node name="ForwardsMarker" type="Marker3D" parent="Control/Up"]
-
-[node name="UnderBedMarker" type="Marker3D" parent="Control/Up"]
-transform = Transform3D(4.371139e-08, -3.821371e-15, -1, -8.742278e-08, -1, 0, -1, 8.742278e-08, -4.371139e-08, -0.7680149, -0.6780522, -0.68167734)
-
-[node name="TableMarker" type="Marker3D" parent="Control/Up"]
-transform = Transform3D(-3.9205577e-08, -0.4421948, 0.8969191, -1.9328947e-08, 0.8969191, 0.4421948, -1, 0, -4.3711392e-08, -0.17422211, 0.09042597, 0)
-
-[node name="WindowMarker" type="Marker3D" parent="Control/Up"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29359752, 0.4886582, -0.6745601)
-
 [node name="Down" type="Button" parent="Control"]
 layout_mode = 1
 anchors_preset = 7

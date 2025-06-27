@@ -38,10 +38,14 @@ func on_child_transition(state: State, new_state_name: String):
 	if current_state:
 		current_state.Exit()
 	
-	new_state.Enter()
-	state_entered.emit(new_state_name)
-	
-	current_state = new_state
+	if state is MovingState:
+		current_state = new_state
+		state_entered.emit(new_state_name)
+	else:
+		current_state = $Moving
+		current_state.nextState = new_state
+		state_entered.emit("moving")
+	current_state.Enter()
 
 func go_up():
 	if current_state is RoomState:

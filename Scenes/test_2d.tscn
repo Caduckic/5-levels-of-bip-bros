@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnvuykgeplo7s"]
+
+[ext_resource type="Texture2D" uid="uid://8qjwsrig52vi" path="res://icon.svg" id="1_4l33o"]
+[ext_resource type="Script" uid="uid://cryhn02se8a1d" path="res://Scenes/test_2d.gd" id="1_hoiwk"]
+
+[node name="Test2D" type="Node2D"]
+script = ExtResource("1_hoiwk")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(256, 224)
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+anchor_mode = 0
+
+[node name="Icon" type="Sprite2D" parent="SubViewport"]
+position = Vector2(86, 91)
+texture = ExtResource("1_4l33o")

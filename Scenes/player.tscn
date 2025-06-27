@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ux8rabmdtp2"]
+[gd_scene load_steps=8 format=3 uid="uid://b6ux8rabmdtp2"]
 
 [ext_resource type="Script" uid="uid://dsa81cbogdct5" path="res://Scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="2_cvnsp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://gnavd0s8r7ig" path="res://Scripts/States/table_state.gd" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://wy2dq56lku0o" path="res://Scripts/States/under_bed_state.gd" id="5_3smsa"]
 [ext_resource type="Script" uid="uid://d0sw60mlvaain" path="res://Scripts/States/window_state.gd" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://t5nfpt22xxku" path="res://Scripts/States/moving_state.gd" id="7_3smsa"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_4flbx")
@@ -16,29 +17,35 @@ script = ExtResource("1_4flbx")
 script = ExtResource("2_cvnsp")
 initial_state = NodePath("Forward")
 
-[node name="Forward" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_pos")]
+[node name="Forward" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
 script = ExtResource("3_6t5aa")
 camera = NodePath("../../Camera3D")
-camera_pos = NodePath("../../Markers/Forward")
+camera_marker = NodePath("../../Markers/Forward")
 metadata/_custom_type_script = "uid://cvwhob15d74c7"
 
-[node name="Table" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_pos")]
+[node name="Table" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
 script = ExtResource("4_x3wgy")
 camera = NodePath("../../Camera3D")
-camera_pos = NodePath("../../Markers/Table")
+camera_marker = NodePath("../../Markers/Table")
 metadata/_custom_type_script = "uid://gnavd0s8r7ig"
 
-[node name="UnderBed" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_pos")]
+[node name="UnderBed" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
 script = ExtResource("5_3smsa")
 camera = NodePath("../../Camera3D")
-camera_pos = NodePath("../../Markers/UnderBed")
+camera_marker = NodePath("../../Markers/UnderBed")
 metadata/_custom_type_script = "uid://wy2dq56lku0o"
 
-[node name="Window" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_pos")]
+[node name="Window" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
 script = ExtResource("6_8erm5")
 camera = NodePath("../../Camera3D")
-camera_pos = NodePath("../../Markers/Window")
+camera_marker = NodePath("../../Markers/Window")
 metadata/_custom_type_script = "uid://d0sw60mlvaain"
+
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera")]
+script = ExtResource("7_3smsa")
+camera = NodePath("../../Camera3D")
+duration = 0.1999999999970896
+metadata/_custom_type_script = "uid://t5nfpt22xxku"
 
 [node name="Markers" type="Node3D" parent="."]
 

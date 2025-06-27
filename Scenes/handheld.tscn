@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b81wdq4b3kaol"]
+
+[ext_resource type="Script" uid="uid://dg5cwt82ttrla" path="res://Scenes/handheld.gd" id="1_shlr4"]
+[ext_resource type="PackedScene" uid="uid://dnvuykgeplo7s" path="res://Scenes/test_2d.tscn" id="2_eiqrl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gkney"]
+size = Vector3(0.09, 0.013, 0.09)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gkney"]
+size = Vector2(0.08, 0.065)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfrpb"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+
+[node name="Handheld" type="Node3D"]
+script = ExtResource("1_shlr4")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006, 0.045)
+mesh = SubResource("BoxMesh_gkney")
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.9063079, 0.4226184, 0, -0.4226184, -0.9063079, 0, 0.013, 0)
+
+[node name="Lid" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.8626451e-09, 0, -1.8626451e-09, 1, 0, 0.0056512984, 0.045000006)
+mesh = SubResource("BoxMesh_gkney")
+skeleton = NodePath("../..")
+
+[node name="Screen" type="MeshInstance3D" parent="Hinge/Lid"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -1, 0, 1, -4.371138e-08, 0, -0.008000001, 0.0052627884)
+mesh = SubResource("QuadMesh_gkney")
+surface_material_override/0 = SubResource("StandardMaterial3D_nfrpb")
+
+[node name="Test2D" parent="." instance=ExtResource("2_eiqrl")]

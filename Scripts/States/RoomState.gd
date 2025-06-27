@@ -2,10 +2,10 @@ extends State
 abstract class_name RoomState
 
 @export var camera: Camera3D
-@export var camera_pos: Marker3D
+@export var camera_marker: Marker3D
 
 func Enter():
-	camera.transform = camera_pos.transform
+	camera.transform = camera_marker.transform
 
 func go_right():
 	pass
