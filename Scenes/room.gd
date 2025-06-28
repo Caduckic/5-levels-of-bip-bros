@@ -27,3 +27,7 @@ func _on_ui_button_pressed(action: String) -> void:
 
 func _on_player_state_entered(state: String) -> void:
 	ui.set_ui_room_state(state)
+
+
+func _on_player_close_window() -> void:
+	$Window.close_window()

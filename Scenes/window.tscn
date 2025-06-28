@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqvo4pxunx0p0"]
+
+[ext_resource type="Script" uid="uid://dagpygxwovaxb" path="res://Scenes/window.gd" id="1_efths"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s7vtt"]
+size = Vector3(0.767, 0.845, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1iw72"]
+size = Vector3(0.687, 0.765, 0.06)
+
+[node name="Window" type="Node3D"]
+script = ExtResource("1_efths")
+
+[node name="FrameBorder" type="CSGMesh3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("BoxMesh_s7vtt")
+
+[node name="WindowCutout" type="CSGMesh3D" parent="FrameBorder"]
+operation = 2
+mesh = SubResource("BoxMesh_1iw72")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ClosedMarker" type="Marker3D" parent="."]
+
+[node name="OpenMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28579605, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,6 +1,7 @@
 extends Node3D
 
 signal state_entered(state: String)
+signal close_window
 
 var state_machine
 
@@ -34,6 +35,8 @@ func go_right():
 	state_machine.go_right()
 
 func action():
+	if state_machine.current_state.name.to_lower() == "window":
+			close_window.emit()
 	state_machine.action()
 
 

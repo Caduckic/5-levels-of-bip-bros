@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfam3g8s1dbeu"]
+[gd_scene load_steps=17 format=3 uid="uid://dfam3g8s1dbeu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_qyhgo"]
 lightmap_size_hint = Vector2i(20, 16)
@@ -10,10 +10,10 @@ lightmap_size_hint = Vector2i(77, 52)
 add_uv2 = true
 size = Vector2(15, 10)
 
-[sub_resource type="QuadMesh" id="QuadMesh_3em56"]
-lightmap_size_hint = Vector2i(20, 16)
+[sub_resource type="QuadMesh" id="QuadMesh_jr6lc"]
+lightmap_size_hint = Vector2i(20, 17)
 add_uv2 = true
-size = Vector2(3.7, 2.8)
+size = Vector2(3.7, 3)
 
 [sub_resource type="QuadMesh" id="QuadMesh_bisa2"]
 lightmap_size_hint = Vector2i(20, 14)
@@ -37,6 +37,24 @@ size = Vector3(3.7, 2.5, 0.14)
 [sub_resource type="BoxMesh" id="BoxMesh_4o3f6"]
 size = Vector3(2.5, 1.7, 0.2)
 
+[sub_resource type="BoxMesh" id="BoxMesh_638d0"]
+size = Vector3(0.05, 1.7, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jr6lc"]
+size = Vector3(2.6, 0.03, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0q3ew"]
+size = Vector3(2.52, 0.04, 0.015)
+
+[sub_resource type="BoxMesh" id="BoxMesh_doiqw"]
+size = Vector3(2.5, 0.015, 0.11)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s7vtt"]
+size = Vector3(0.767, 0.845, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1iw72"]
+size = Vector3(0.687, 0.765, 0.06)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_v321d"]
 top_radius = 0.07
 bottom_radius = 0.1
@@ -55,7 +73,7 @@ mesh = SubResource("QuadMesh_7ooh4")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 2.5, 0)
-mesh = SubResource("QuadMesh_3em56")
+mesh = SubResource("QuadMesh_jr6lc")
 
 [node name="Wall Left" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.4, 1.25, 0)
@@ -86,6 +104,50 @@ mesh = SubResource("BoxMesh_bisa2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 operation = 2
 mesh = SubResource("BoxMesh_4o3f6")
+
+[node name="Window Frame Column Left" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.225, 0.4, 0)
+mesh = SubResource("BoxMesh_638d0")
+
+[node name="Window Frame Column Mid Left" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.408, 0.4, 0)
+mesh = SubResource("BoxMesh_638d0")
+
+[node name="Window Frame Column Right" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.225, 0.4, 0)
+mesh = SubResource("BoxMesh_638d0")
+
+[node name="Window Frame Column Mid Right" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408, 0.4, 0)
+mesh = SubResource("BoxMesh_638d0")
+
+[node name="Window Ledge Inside" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.465, 0.09)
+mesh = SubResource("BoxMesh_jr6lc")
+
+[node name="Window Ledge Under" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.078)
+mesh = SubResource("BoxMesh_0q3ew")
+
+[node name="Window Ledge Outside" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.465, -0.09)
+mesh = SubResource("BoxMesh_jr6lc")
+
+[node name="Window Frame Bottom" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.442, 0)
+mesh = SubResource("BoxMesh_doiqw")
+
+[node name="Window Frame Top" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.2420001, 0)
+mesh = SubResource("BoxMesh_doiqw")
+
+[node name="Window Frame Top Window" type="CSGMesh3D" parent="Right Wall"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.817, 0.81039643, -0.024999976)
+mesh = SubResource("BoxMesh_s7vtt")
+
+[node name="Window Frame Window" type="CSGMesh3D" parent="Right Wall/Window Frame Top Window"]
+operation = 2
+mesh = SubResource("BoxMesh_1iw72")
 
 [node name="Bed" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9170735, 0, 0.87443185)
