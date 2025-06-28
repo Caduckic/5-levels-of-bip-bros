@@ -16,6 +16,7 @@ emission_operator = 1
 
 [node name="Handheld" type="Node3D"]
 script = ExtResource("1_shlr4")
+duration = 0.08000000000174623
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006, 0.045)
@@ -33,5 +34,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -1, 0, 1, -4.371138e-08, 0, -0.008000001, 0.0052627884)
 mesh = SubResource("QuadMesh_gkney")
 surface_material_override/0 = SubResource("StandardMaterial3D_nfrpb")
+
+[node name="Flash" type="SpotLight3D" parent="Hinge/Lid"]
+transform = Transform3D(1, 0, 0, 0, 3.5762787e-07, -0.9999998, 0, 0.9999998, 3.5762787e-07, -0.02548027, 0.0085498, 0.023084305)
+light_energy = 0.0
 
 [node name="Test2D" parent="." instance=ExtResource("2_eiqrl")]

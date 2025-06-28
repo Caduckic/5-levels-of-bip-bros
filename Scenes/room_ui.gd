@@ -42,6 +42,13 @@ func set_ui_moving():
 	$Control/Left.visible = false
 	$Control/Right.visible = false
 	$Control/Action.visible = false
+	
+func set_ui_play():
+	$Control/Up.visible = false
+	$Control/Down.visible = false
+	$Control/Left.visible = false
+	$Control/Right.visible = false
+	$Control/Action.visible = true
 
 # sets the button layout per state
 func set_ui_room_state(state: String):
@@ -55,7 +62,8 @@ func set_ui_room_state(state: String):
 		set_ui_window()
 	if state.to_lower() == "moving":
 		set_ui_moving()
-		
+	if state.to_lower() == "play":
+		set_ui_play()
 
 func _on_left_pressed() -> void:
 	button_pressed.emit("left")

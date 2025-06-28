@@ -8,7 +8,6 @@ var state_machine
 func _ready() -> void:
 	state_machine = $StateMachine
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("UP"):
@@ -19,6 +18,8 @@ func _physics_process(_delta: float) -> void:
 		state_machine.go_left()
 	if Input.is_action_just_pressed("RIGHT"):
 		state_machine.go_right()
+	if Input.is_action_just_pressed("ACTION"):
+		state_machine.action()
 
 func go_up():
 	state_machine.go_up()

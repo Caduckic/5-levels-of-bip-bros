@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnvuykgeplo7s"]
+[gd_scene load_steps=5 format=3 uid="uid://dnvuykgeplo7s"]
 
 [ext_resource type="Texture2D" uid="uid://8qjwsrig52vi" path="res://icon.svg" id="1_4l33o"]
 [ext_resource type="Script" uid="uid://cryhn02se8a1d" path="res://Scenes/test_2d.gd" id="1_hoiwk"]
+[ext_resource type="Script" uid="uid://d3pb8gjoy5fdf" path="res://Scenes/test_2d_move.gd" id="3_xcm66"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hoiwk"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Test2D" type="Node2D"]
 script = ExtResource("1_hoiwk")
 
+[node name="ViewportSprite" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("ViewportTexture_hoiwk")
+centered = false
+
 [node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+handle_input_locally = false
 size = Vector2i(256, 224)
+render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport"]
 anchor_mode = 0
@@ -15,3 +27,4 @@ anchor_mode = 0
 [node name="Icon" type="Sprite2D" parent="SubViewport"]
 position = Vector2(86, 91)
 texture = ExtResource("1_4l33o")
+script = ExtResource("3_xcm66")

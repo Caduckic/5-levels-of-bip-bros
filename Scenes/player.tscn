@@ -1,63 +1,128 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6ux8rabmdtp2"]
+[gd_scene load_steps=11 format=3 uid="uid://b6ux8rabmdtp2"]
 
 [ext_resource type="Script" uid="uid://dsa81cbogdct5" path="res://Scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://cvwhob15d74c7" path="res://Scripts/States/forward_state.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://capyw4hutkcn6" path="res://Scripts/States/playing_state.gd" id="4_f1ek2"]
 [ext_resource type="Script" uid="uid://gnavd0s8r7ig" path="res://Scripts/States/table_state.gd" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://wy2dq56lku0o" path="res://Scripts/States/under_bed_state.gd" id="5_3smsa"]
 [ext_resource type="Script" uid="uid://d0sw60mlvaain" path="res://Scripts/States/window_state.gd" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://t5nfpt22xxku" path="res://Scripts/States/moving_state.gd" id="7_3smsa"]
+[ext_resource type="PackedScene" uid="uid://b81wdq4b3kaol" path="res://Scenes/handheld.tscn" id="8_8erm5"]
+[ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="10_tx1dd"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_4flbx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 
+[node name="Handheld" parent="." instance=ExtResource("8_8erm5")]
+transform = Transform3D(0.25881913, 0, 0.9659257, 0, 1, 0, -0.96592605, 0, 0.25881904, -0.60160744, -0.26502234, -0.054905653)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_cvnsp")
 initial_state = NodePath("Forward")
 
-[node name="Forward" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
+[node name="Forward" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker", "handheld", "handheld_maker")]
 script = ExtResource("3_6t5aa")
 camera = NodePath("../../Camera3D")
-camera_marker = NodePath("../../Markers/Forward")
+camera_marker = NodePath("../../CameraMarkers/Forward")
+handheld = NodePath("../../Handheld")
+handheld_maker = NodePath("../../HandheldMarkers/Forward")
 metadata/_custom_type_script = "uid://cvwhob15d74c7"
 
-[node name="Table" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
+[node name="Play" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker", "handheld", "handheld_maker")]
+script = ExtResource("4_f1ek2")
+camera = NodePath("../../Camera3D")
+camera_marker = NodePath("../../CameraMarkers/Play")
+handheld = NodePath("../../Handheld")
+handheld_maker = NodePath("../../HandheldMarkers/Play")
+metadata/_custom_type_script = "uid://capyw4hutkcn6"
+
+[node name="Table" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker", "handheld", "handheld_maker")]
 script = ExtResource("4_x3wgy")
 camera = NodePath("../../Camera3D")
-camera_marker = NodePath("../../Markers/Table")
+camera_marker = NodePath("../../CameraMarkers/Table")
+handheld = NodePath("../../Handheld")
+handheld_maker = NodePath("../../HandheldMarkers/Table")
 metadata/_custom_type_script = "uid://gnavd0s8r7ig"
 
-[node name="UnderBed" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
+[node name="UnderBed" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker", "handheld", "handheld_maker")]
 script = ExtResource("5_3smsa")
 camera = NodePath("../../Camera3D")
-camera_marker = NodePath("../../Markers/UnderBed")
+camera_marker = NodePath("../../CameraMarkers/UnderBed")
+handheld = NodePath("../../Handheld")
+handheld_maker = NodePath("../../HandheldMarkers/UnderBed")
 metadata/_custom_type_script = "uid://wy2dq56lku0o"
 
-[node name="Window" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker")]
+[node name="Window" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "camera_marker", "handheld", "handheld_maker")]
 script = ExtResource("6_8erm5")
 camera = NodePath("../../Camera3D")
-camera_marker = NodePath("../../Markers/Window")
+camera_marker = NodePath("../../CameraMarkers/Window")
+handheld = NodePath("../../Handheld")
+handheld_maker = NodePath("../../HandheldMarkers/Window")
 metadata/_custom_type_script = "uid://d0sw60mlvaain"
 
-[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera")]
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "handheld")]
 script = ExtResource("7_3smsa")
 camera = NodePath("../../Camera3D")
+handheld = NodePath("../../Handheld")
 duration = 0.1999999999970896
 metadata/_custom_type_script = "uid://t5nfpt22xxku"
 
-[node name="Markers" type="Node3D" parent="."]
+[node name="CameraMarkers" type="Node3D" parent="."]
 
-[node name="Forward" type="Marker3D" parent="Markers"]
+[node name="Forward" type="Marker3D" parent="CameraMarkers"]
+metadata/_edit_lock_ = true
 
-[node name="Table" type="Marker3D" parent="Markers"]
+[node name="Table" type="Marker3D" parent="CameraMarkers"]
 transform = Transform3D(-3.9205577e-08, -0.4421948, 0.8969191, -1.9328947e-08, 0.8969191, 0.4421948, -1, 0, -4.3711392e-08, -0.17422211, 0.09042597, 0)
+metadata/_edit_lock_ = true
 
-[node name="UnderBed" type="Marker3D" parent="Markers"]
+[node name="UnderBed" type="Marker3D" parent="CameraMarkers"]
 transform = Transform3D(4.371139e-08, -3.821371e-15, -1, -8.742278e-08, -1, 0, -1, 8.742278e-08, -4.371139e-08, -0.7680149, -0.6780522, -0.68167734)
+metadata/_edit_lock_ = true
 
-[node name="Window" type="Marker3D" parent="Markers"]
+[node name="Window" type="Marker3D" parent="CameraMarkers"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29359752, 0.4886582, -0.6745601)
+metadata/_edit_lock_ = true
+
+[node name="Play" type="Marker3D" parent="CameraMarkers"]
+transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.34202012, 0, -0.34202012, 0.93969256, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="HandheldMarkers" type="Node3D" parent="."]
+
+[node name="Window" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(0.712026, 0, 0.7021531, 0, 1, 0, -0.7021531, 0, 0.712026, -0.2667741, -0.35486522, -0.553204)
+metadata/_edit_lock_ = true
+
+[node name="Forward" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(0.88376564, 0.2603073, 0.3888424, 0, 0.8309845, -0.55629563, -0.4679298, 0.49163496, 0.7343955, -0.119, -0.159, -0.232)
+metadata/_edit_lock_ = true
+
+[node name="Table" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -0.60160744, -0.26502234, -0.054905653)
+metadata/_edit_lock_ = true
+
+[node name="TablePickedUp" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(-0.41969526, 0.07349977, 0.90468425, -0.20691617, 0.9627242, -0.17420629, -0.88376576, -0.26030734, -0.3888424, -0.31199837, -0.15477335, 0.11900001)
+metadata/_edit_lock_ = true
+
+[node name="Play" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, -0.075, -0.045)
+metadata/_edit_lock_ = true
+
+[node name="UnderBed" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(0.4679299, -0.49163496, -0.7343955, -1.5452252e-07, -0.8309845, 0.5562955, -0.88376576, -0.26030722, -0.38884255, -0.5360149, -0.51905215, -0.5626773)
+metadata/_edit_lock_ = true
+
+[node name="Flash" type="Marker3D" parent="HandheldMarkers"]
+transform = Transform3D(4.3711392e-08, -0.8319541, -0.5548444, -8.7422784e-08, -0.55484444, 0.83195406, -1.0000001, 1.2140173e-08, -9.6984756e-08, -0.5910149, -0.62405217, -0.66267735)
+metadata/_edit_lock_ = true
+
+[node name="RoomModel" parent="." instance=ExtResource("10_tx1dd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, -0.796, -1.536)
+metadata/_edit_lock_ = true
 
 [connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]

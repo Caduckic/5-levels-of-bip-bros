@@ -13,7 +13,11 @@ func go_left():
 func go_down():
 	transitioned.emit(self, "underbed")
 
-# begin handheld game
+# do nothing
 func go_up():
 	pass
-	#transitioned.emit(self, "play")
+
+# begin handheld game
+func action():
+	if GlobalVariables.has_handheld:
+		transitioned.emit(self, "play")
