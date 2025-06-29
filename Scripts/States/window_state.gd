@@ -10,5 +10,5 @@ func go_down():
 	transitioned.emit(self, "forward")
 
 # close window
-func go_up():
+func action():
 	pass

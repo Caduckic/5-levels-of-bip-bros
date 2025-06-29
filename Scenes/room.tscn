@@ -43,8 +43,8 @@ light_data = ExtResource("2_bisa2")
 
 [node name="Window" parent="." instance=ExtResource("6_nfrpb")]
 transform = Transform3D(-1.07284414e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284414e-07, 1.4449999, 1.238, 0.817)
-duration_min = 1.0
-duration_max = 5.0
+duration_min = 20.0
+duration_max = 30.0
 open_time = 0.8000000000029104
 is_on = true
 

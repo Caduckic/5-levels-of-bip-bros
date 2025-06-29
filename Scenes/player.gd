@@ -12,15 +12,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("UP"):
-		state_machine.go_up()
+		go_up()
 	if Input.is_action_just_pressed("DOWN"):
-		state_machine.go_down()
+		go_down()
 	if Input.is_action_just_pressed("LEFT"):
-		state_machine.go_left()
+		go_left()
 	if Input.is_action_just_pressed("RIGHT"):
-		state_machine.go_right()
+		go_right()
 	if Input.is_action_just_pressed("ACTION"):
-		state_machine.action()
+		action()
 
 func go_up():
 	state_machine.go_up()

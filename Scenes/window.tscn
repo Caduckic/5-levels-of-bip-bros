@@ -20,6 +20,7 @@ operation = 2
 mesh = SubResource("BoxMesh_1iw72")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="ClosedMarker" type="Marker3D" parent="."]
 
