@@ -2,15 +2,21 @@ extends Node3D
 
 signal state_entered(state: String)
 signal close_window
+signal flashed
 
 var state_machine
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	state_machine = $StateMachine
+	state_machine.Start()
+
+func _process(delta: float) -> void:
+	state_machine.Update(delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	state_machine.PhysicsUpdate(delta)
 	if Input.is_action_just_pressed("UP"):
 		go_up()
 	if Input.is_action_just_pressed("DOWN"):
@@ -39,6 +45,17 @@ func action():
 			close_window.emit()
 	state_machine.action()
 
+func begin_death():
+	GlobalVariables.is_playing = false
+	GlobalVariables.has_handheld = false
+	$Handheld.transform = $HandheldMarkers/Table.transform
+	state_machine.change_to_state("dying")
+
+func reset_to_forward():
+	state_machine.change_to_state("forward")
 
 func _on_state_machine_state_entered(state:  String) -> void:
 	state_entered.emit(state)
+
+func _on_handheld_flashed() -> void:
+	flashed.emit()

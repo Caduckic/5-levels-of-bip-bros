@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://pocbgdw532ce"]
+[gd_scene load_steps=10 format=3 uid="uid://pocbgdw532ce"]
 
 [ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="1_88gup"]
 [ext_resource type="Script" uid="uid://cxmh0ji26pwj8" path="res://Scenes/room.gd" id="1_ka7wq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c3x8g3u6hb0wv" path="res://Scenes/room_ui.tscn" id="3_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://b6ux8rabmdtp2" path="res://Scenes/player.tscn" id="3_ka7wq"]
 [ext_resource type="PackedScene" uid="uid://cqvo4pxunx0p0" path="res://Scenes/window.tscn" id="6_nfrpb"]
+[ext_resource type="PackedScene" uid="uid://c5kcclyfmqf64" path="res://Scenes/bed_monster.tscn" id="7_4gp0m"]
 
 [sub_resource type="Environment" id="Environment_88gup"]
 fog_enabled = true
@@ -48,6 +49,12 @@ duration_max = 30.0
 open_time = 0.8000000000029104
 is_on = true
 
+[node name="BedMonster" parent="." instance=ExtResource("7_4gp0m")]
+is_on = true
+
 [connection signal="close_window" from="Player" to="." method="_on_player_close_window"]
+[connection signal="flashed" from="Player" to="." method="_on_player_flashed"]
 [connection signal="state_entered" from="Player" to="." method="_on_player_state_entered"]
 [connection signal="button_pressed" from="UI" to="." method="_on_ui_button_pressed"]
+[connection signal="killed_player" from="BedMonster" to="." method="_on_bed_monster_killed_player"]
+[connection signal="killing_player" from="BedMonster" to="." method="_on_bed_monster_killing_player"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5kcclyfmqf64"]
+
+[ext_resource type="Script" uid="uid://dby0qujfctnmm" path="res://Scripts/monster.gd" id="1_j41wd"]
+[ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="1_o4tk4"]
+[ext_resource type="Texture2D" uid="uid://8qjwsrig52vi" path="res://icon.svg" id="2_tb6ep"]
+[ext_resource type="Script" uid="uid://df0j1xk3fvmw1" path="res://Scripts/States/Monster/idle_state.gd" id="3_qwdy0"]
+[ext_resource type="Script" uid="uid://bkr7tx3dg55v8" path="res://Scripts/States/Monster/ready_state.gd" id="4_tb6ep"]
+[ext_resource type="Script" uid="uid://bvmn3ddkn8eia" path="res://Scripts/States/Monster/kill_state.gd" id="5_68cvj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_68cvj"]
+size = Vector2(0.7, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5k25"]
+albedo_texture = ExtResource("2_tb6ep")
+
+[node name="BedMonster" type="Node3D"]
+script = ExtResource("1_j41wd")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.733, 0.1, 0.8053345)
+mesh = SubResource("QuadMesh_68cvj")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5k25")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_o4tk4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_timer", "mesh", "under_bed_marker")]
+script = ExtResource("3_qwdy0")
+idle_timer = NodePath("../../IdleTimer")
+idle_duration_min = 20.0
+idle_duration_max = 40.0
+mesh = NodePath("../../Mesh")
+under_bed_marker = NodePath("../../Markers/UnderBed")
+metadata/_custom_type_script = "uid://df0j1xk3fvmw1"
+
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("kill_timer")]
+script = ExtResource("4_tb6ep")
+kill_timer = NodePath("../../KillTimer")
+kill_duration = 15.0
+metadata/_custom_type_script = "uid://bkr7tx3dg55v8"
+
+[node name="Kill" type="Node" parent="StateMachine" node_paths=PackedStringArray("mesh", "over_player_marker")]
+script = ExtResource("5_68cvj")
+mesh = NodePath("../../Mesh")
+over_player_marker = NodePath("../../Markers/OverPlayer")
+death_duration = 1.0
+metadata/_custom_type_script = "uid://bvmn3ddkn8eia"
+
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="KillTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="OverPlayer" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9432154, 0.8245788, 1.1439328)
+metadata/_edit_lock_ = true
+
+[node name="UnderBed" type="Marker3D" parent="Markers"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.733, 0.1, 0.8053345)
+metadata/_edit_lock_ = true
+
+[connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]
+[connection signal="killed_player" from="StateMachine/Kill" to="." method="_on_kill_killed_player"]

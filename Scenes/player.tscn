@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6ux8rabmdtp2"]
+[gd_scene load_steps=12 format=3 uid="uid://b6ux8rabmdtp2"]
 
 [ext_resource type="Script" uid="uid://dsa81cbogdct5" path="res://Scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://cvwhob15d74c7" path="res://Scripts/States/forward_state.gd" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://capyw4hutkcn6" path="res://Scripts/States/playing_state.gd" id="4_f1ek2"]
-[ext_resource type="Script" uid="uid://gnavd0s8r7ig" path="res://Scripts/States/table_state.gd" id="4_x3wgy"]
-[ext_resource type="Script" uid="uid://wy2dq56lku0o" path="res://Scripts/States/under_bed_state.gd" id="5_3smsa"]
-[ext_resource type="Script" uid="uid://d0sw60mlvaain" path="res://Scripts/States/window_state.gd" id="6_8erm5"]
-[ext_resource type="Script" uid="uid://t5nfpt22xxku" path="res://Scripts/States/moving_state.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://cvwhob15d74c7" path="res://Scripts/States/Player/forward_state.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://capyw4hutkcn6" path="res://Scripts/States/Player/playing_state.gd" id="4_f1ek2"]
+[ext_resource type="Script" uid="uid://gnavd0s8r7ig" path="res://Scripts/States/Player/table_state.gd" id="4_x3wgy"]
+[ext_resource type="Script" uid="uid://wy2dq56lku0o" path="res://Scripts/States/Player/under_bed_state.gd" id="5_3smsa"]
+[ext_resource type="Script" uid="uid://d0sw60mlvaain" path="res://Scripts/States/Player/window_state.gd" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://t5nfpt22xxku" path="res://Scripts/States/Player/moving_state.gd" id="7_3smsa"]
 [ext_resource type="PackedScene" uid="uid://b81wdq4b3kaol" path="res://Scenes/handheld.tscn" id="8_8erm5"]
+[ext_resource type="Script" uid="uid://lrn5twpaoimo" path="res://Scripts/States/Player/dying_state.gd" id="10_gymyn"]
 [ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="10_tx1dd"]
 
 [node name="Player" type="Node3D"]
@@ -70,6 +71,12 @@ handheld = NodePath("../../Handheld")
 duration = 0.1999999999970896
 metadata/_custom_type_script = "uid://t5nfpt22xxku"
 
+[node name="Dying" type="Node" parent="StateMachine" node_paths=PackedStringArray("camera", "forward_marker")]
+script = ExtResource("10_gymyn")
+camera = NodePath("../../Camera3D")
+forward_marker = NodePath("../../CameraMarkers/Forward")
+metadata/_custom_type_script = "uid://lrn5twpaoimo"
+
 [node name="CameraMarkers" type="Node3D" parent="."]
 
 [node name="Forward" type="Marker3D" parent="CameraMarkers"]
@@ -123,6 +130,8 @@ metadata/_edit_lock_ = true
 
 [node name="RoomModel" parent="." instance=ExtResource("10_tx1dd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, -0.796, -1.536)
+visible = false
 metadata/_edit_lock_ = true
 
+[connection signal="flashed" from="Handheld" to="." method="_on_handheld_flashed"]
 [connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]
