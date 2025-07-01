@@ -33,15 +33,25 @@ func _on_player_close_window() -> void:
 	$Window.close_window()
 
 
-func _on_bed_monster_killed_player(_monster_name:  String) -> void:
-	print("you died")
-	$BedMonster.reset_to_idle()
-	player.reset_to_forward()
-
-
 func _on_bed_monster_killing_player() -> void:
 	player.begin_death()
 
 
 func _on_player_flashed() -> void:
 	$BedMonster.reset_to_idle()
+
+
+func _on_window_monster_killing_player() -> void:
+	player.begin_death()
+
+
+func _on_window_monster_killed_player() -> void:
+	print("you died")
+	$WindowMonster.reset_to_idle()
+	player.reset_to_forward()
+
+
+func _on_bed_monster_killed_player() -> void:
+	print("you died")
+	$BedMonster.reset_to_idle()
+	player.reset_to_forward()

@@ -32,6 +32,9 @@ func _on_timer_timeout() -> void:
 	tween.connect("finished", _on_open_tween_finish)
 	tween.play()
 
+func add_time_until_open(duration: float):
+	$Timer.wait_time += duration
+
 func _on_open_tween_finish():
 	is_open = true
 

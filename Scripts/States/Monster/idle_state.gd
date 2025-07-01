@@ -6,11 +6,11 @@ class_name IdleState
 @export var idle_duration_max: float
 
 @export var mesh: MeshInstance3D
-@export var under_bed_marker: Marker3D
+@export var idle_marker: Marker3D
 
 func Enter():
 	mesh.visible = false
-	mesh.transform = under_bed_marker.transform
+	mesh.transform = idle_marker.transform
 	idle_timer.connect("timeout", _on_idle_timeout)
 	var idle_time = randf_range(idle_duration_min, idle_duration_max)
 	idle_timer.start(idle_time)

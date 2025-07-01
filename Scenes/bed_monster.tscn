@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5kcclyfmqf64"]
+[gd_scene load_steps=9 format=3 uid="uid://cbunnqorav04r"]
 
-[ext_resource type="Script" uid="uid://dby0qujfctnmm" path="res://Scripts/monster.gd" id="1_j41wd"]
+[ext_resource type="Script" uid="uid://dby0qujfctnmm" path="res://Scripts/bed_monster.gd" id="1_j41wd"]
 [ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="1_o4tk4"]
 [ext_resource type="Texture2D" uid="uid://8qjwsrig52vi" path="res://icon.svg" id="2_tb6ep"]
 [ext_resource type="Script" uid="uid://df0j1xk3fvmw1" path="res://Scripts/States/Monster/idle_state.gd" id="3_qwdy0"]
@@ -25,13 +25,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_d5k25")
 script = ExtResource("1_o4tk4")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_timer", "mesh", "under_bed_marker")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_timer", "mesh", "idle_marker")]
 script = ExtResource("3_qwdy0")
 idle_timer = NodePath("../../IdleTimer")
 idle_duration_min = 20.0
 idle_duration_max = 40.0
 mesh = NodePath("../../Mesh")
-under_bed_marker = NodePath("../../Markers/UnderBed")
+idle_marker = NodePath("../../Markers/UnderBed")
 metadata/_custom_type_script = "uid://df0j1xk3fvmw1"
 
 [node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("kill_timer")]

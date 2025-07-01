@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://pocbgdw532ce"]
+[gd_scene load_steps=11 format=3 uid="uid://pocbgdw532ce"]
 
 [ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="1_88gup"]
 [ext_resource type="Script" uid="uid://cxmh0ji26pwj8" path="res://Scenes/room.gd" id="1_ka7wq"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c3x8g3u6hb0wv" path="res://Scenes/room_ui.tscn" id="3_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://b6ux8rabmdtp2" path="res://Scenes/player.tscn" id="3_ka7wq"]
 [ext_resource type="PackedScene" uid="uid://cqvo4pxunx0p0" path="res://Scenes/window.tscn" id="6_nfrpb"]
-[ext_resource type="PackedScene" uid="uid://c5kcclyfmqf64" path="res://Scenes/bed_monster.tscn" id="7_4gp0m"]
+[ext_resource type="PackedScene" uid="uid://cbunnqorav04r" path="res://Scenes/bed_monster.tscn" id="7_4gp0m"]
+[ext_resource type="PackedScene" uid="uid://3mqalcs4dxif" path="res://Scenes/window_monster.tscn" id="8_phao3"]
 
 [sub_resource type="Environment" id="Environment_88gup"]
 fog_enabled = true
@@ -44,13 +45,17 @@ light_data = ExtResource("2_bisa2")
 
 [node name="Window" parent="." instance=ExtResource("6_nfrpb")]
 transform = Transform3D(-1.07284414e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284414e-07, 1.4449999, 1.238, 0.817)
-duration_min = 20.0
-duration_max = 30.0
+duration_min = 30.0
+duration_max = 40.0
 open_time = 0.8000000000029104
 is_on = true
 
 [node name="BedMonster" parent="." instance=ExtResource("7_4gp0m")]
 is_on = true
+
+[node name="WindowMonster" parent="." node_paths=PackedStringArray("window") instance=ExtResource("8_phao3")]
+is_on = true
+window = NodePath("../Window")
 
 [connection signal="close_window" from="Player" to="." method="_on_player_close_window"]
 [connection signal="flashed" from="Player" to="." method="_on_player_flashed"]
@@ -58,3 +63,5 @@ is_on = true
 [connection signal="button_pressed" from="UI" to="." method="_on_ui_button_pressed"]
 [connection signal="killed_player" from="BedMonster" to="." method="_on_bed_monster_killed_player"]
 [connection signal="killing_player" from="BedMonster" to="." method="_on_bed_monster_killing_player"]
+[connection signal="killed_player" from="WindowMonster" to="." method="_on_window_monster_killed_player"]
+[connection signal="killing_player" from="WindowMonster" to="." method="_on_window_monster_killing_player"]
