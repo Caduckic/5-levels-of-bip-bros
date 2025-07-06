@@ -12,7 +12,7 @@ func go_down():
 	pass
 
 func action():
-	if !GlobalVariables.has_handheld:
+	if !GlobalVariables.has_handheld and !GlobalVariables.handheld_banned:
 		handheld_maker = $"../../HandheldMarkers/TablePickedUp"
 		GlobalVariables.has_handheld = true
 		has_handheld = true

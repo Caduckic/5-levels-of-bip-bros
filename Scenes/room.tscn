@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pocbgdw532ce"]
+[gd_scene load_steps=14 format=3 uid="uid://pocbgdw532ce"]
 
 [ext_resource type="PackedScene" uid="uid://dfam3g8s1dbeu" path="res://Scenes/room_model.tscn" id="1_88gup"]
 [ext_resource type="Script" uid="uid://cxmh0ji26pwj8" path="res://Scenes/room.gd" id="1_ka7wq"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cqvo4pxunx0p0" path="res://Scenes/window.tscn" id="6_nfrpb"]
 [ext_resource type="PackedScene" uid="uid://cbunnqorav04r" path="res://Scenes/bed_monster.tscn" id="7_4gp0m"]
 [ext_resource type="PackedScene" uid="uid://3mqalcs4dxif" path="res://Scenes/window_monster.tscn" id="8_phao3"]
+[ext_resource type="PackedScene" uid="uid://dhnjxu8oc2be3" path="res://Scenes/parent.tscn" id="9_ojh4s"]
+[ext_resource type="PackedScene" uid="uid://ds4ykn1rjspxv" path="res://Scenes/door.tscn" id="10_ilpkg"]
+[ext_resource type="PackedScene" uid="uid://b2i15mxofu5ee" path="res://Scenes/door_monster.tscn" id="10_jghof"]
 
 [sub_resource type="Environment" id="Environment_88gup"]
 fog_enabled = true
@@ -51,11 +54,22 @@ open_time = 0.8000000000029104
 is_on = true
 
 [node name="BedMonster" parent="." instance=ExtResource("7_4gp0m")]
-is_on = true
 
 [node name="WindowMonster" parent="." node_paths=PackedStringArray("window") instance=ExtResource("8_phao3")]
-is_on = true
 window = NodePath("../Window")
+
+[node name="Parent" parent="." node_paths=PackedStringArray("player", "door", "door_monster") instance=ExtResource("9_ojh4s")]
+player = NodePath("../Player")
+door = NodePath("../Door")
+door_monster = NodePath("../DoorMonster")
+
+[node name="DoorMonster" parent="." node_paths=PackedStringArray("door", "parent") instance=ExtResource("10_jghof")]
+is_on = true
+door = NodePath("../Door")
+parent = NodePath("../Parent")
+
+[node name="Door" parent="." instance=ExtResource("10_ilpkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2891272, 1.02, -1.8607392)
 
 [connection signal="close_window" from="Player" to="." method="_on_player_close_window"]
 [connection signal="flashed" from="Player" to="." method="_on_player_flashed"]
@@ -65,3 +79,7 @@ window = NodePath("../Window")
 [connection signal="killing_player" from="BedMonster" to="." method="_on_bed_monster_killing_player"]
 [connection signal="killed_player" from="WindowMonster" to="." method="_on_window_monster_killed_player"]
 [connection signal="killing_player" from="WindowMonster" to="." method="_on_window_monster_killing_player"]
+[connection signal="punished_player" from="Parent" to="." method="_on_parent_punished_player"]
+[connection signal="punishing_player" from="Parent" to="." method="_on_parent_punishing_player"]
+[connection signal="killed_player" from="DoorMonster" to="." method="_on_door_monster_killed_player"]
+[connection signal="killing_player" from="DoorMonster" to="." method="_on_door_monster_killing_player"]

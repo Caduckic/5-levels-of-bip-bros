@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhnjxu8oc2be3"]
+
+[ext_resource type="Texture2D" uid="uid://8qjwsrig52vi" path="res://icon.svg" id="1_5n6ew"]
+[ext_resource type="Script" uid="uid://dn4ywwn1g7xtu" path="res://Scenes/parent.gd" id="1_r8yp6"]
+[ext_resource type="Script" uid="uid://gmd63iao7pnx" path="res://Scenes/state_machine.gd" id="3_dqu6b"]
+[ext_resource type="Script" uid="uid://df0j1xk3fvmw1" path="res://Scripts/States/Monster/idle_state.gd" id="4_d1567"]
+[ext_resource type="Script" uid="uid://dg0kavx0sxlyt" path="res://Scripts/States/Monster/ready_punish_state.gd" id="5_mupuv"]
+[ext_resource type="Script" uid="uid://xuoi8wutommm" path="res://Scripts/States/Monster/punish_state.gd" id="6_or10m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jddpy"]
+albedo_texture = ExtResource("1_5n6ew")
+
+[sub_resource type="QuadMesh" id="QuadMesh_w3rd3"]
+size = Vector2(0.6, 0.6)
+
+[node name="Parent" type="Node3D"]
+script = ExtResource("1_r8yp6")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -0.96009886, 1.4574795, -2.0572872)
+material_override = SubResource("StandardMaterial3D_jddpy")
+mesh = SubResource("QuadMesh_w3rd3")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_dqu6b")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_timer", "mesh", "idle_marker")]
+script = ExtResource("4_d1567")
+idle_timer = NodePath("../../IdleTimer")
+idle_duration_min = 3.0
+idle_duration_max = 3.0
+mesh = NodePath("../../Mesh")
+idle_marker = NodePath("../../Markers/Doorway")
+metadata/_custom_type_script = "uid://df0j1xk3fvmw1"
+
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("punish_timer")]
+script = ExtResource("5_mupuv")
+punish_timer = NodePath("../../PunishTimer")
+punish_duration = 3.0
+metadata/_custom_type_script = "uid://dg0kavx0sxlyt"
+
+[node name="Punish" type="Node" parent="StateMachine" node_paths=PackedStringArray("mesh", "doorway_maker", "over_player_marker", "handheld_removal_marker", "wait_at_door_timer")]
+script = ExtResource("6_or10m")
+mesh = NodePath("../../Mesh")
+doorway_maker = NodePath("../../Markers/Doorway")
+over_player_marker = NodePath("../../Markers/OverPlayer")
+handheld_removal_marker = NodePath("../../Markers/HandheldRemoval")
+walk_duration = 1.0
+shake_head_duration = 0.6000000000058208
+remove_duration = 0.4000000000087311
+wait_at_door_timer = NodePath("../../WaitAtDoorTimer")
+wait_at_door_durtation = 5.0
+metadata/_custom_type_script = "uid://xuoi8wutommm"
+
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PunishTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VisibleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WaitAtDoorTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="Doorway" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.96009886, 1.4574795, -2.0572872)
+
+[node name="OverPlayer" type="Marker3D" parent="Markers"]
+transform = Transform3D(0.94956785, 0, 0.3135616, 0.072113454, 0.97319496, -0.21838331, -0.30515656, 0.2299818, 0.92411464, 0.4900267, 1.0641277, 0.7408417)
+
+[node name="HandheldRemoval" type="Marker3D" parent="Markers"]
+transform = Transform3D(0.85474175, 0.48602012, 0.1822114, 0.30773878, -0.19181976, -0.93193436, -0.41798717, 0.85263705, -0.31352344, 0.4900267, 1.0641277, 0.5173403)
+
+[connection signal="state_entered" from="StateMachine" to="." method="_on_state_machine_state_entered"]
+[connection signal="punished_player" from="StateMachine/Punish" to="." method="_on_punish_punished_player"]
+[connection signal="timeout" from="VisibleTimer" to="." method="_on_visible_timer_timeout"]

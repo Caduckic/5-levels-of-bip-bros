@@ -55,3 +55,23 @@ func _on_bed_monster_killed_player() -> void:
 	print("you died")
 	$BedMonster.reset_to_idle()
 	player.reset_to_forward()
+
+
+func _on_parent_punished_player() -> void:
+	print("handheld banned")
+	$Parent.reset_to_idle()
+	player.reset_to_forward()
+
+
+func _on_parent_punishing_player() -> void:
+	player.begin_punish()
+
+
+func _on_door_monster_killed_player() -> void:
+	print("you died")
+	$DoorMonster.reset_to_idle()
+	player.reset_to_forward()
+
+
+func _on_door_monster_killing_player() -> void:
+	player.begin_death()

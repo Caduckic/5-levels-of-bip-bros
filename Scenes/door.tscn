@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds4ykn1rjspxv"]
+
+[ext_resource type="Script" uid="uid://cy5o4mmh06dx0" path="res://Scenes/door.gd" id="1_w6aom"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wvrej"]
+size = Vector3(0.78, 2.02, 0.06)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_w6aom")
+move_duration = 1.0
+
+[node name="Mesh" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, -8.351872e-23, 0, 1, 0, -8.351872e-23, 0, 1, 0.38912725, 0, -0.029260755)
+operation = 2
+mesh = SubResource("BoxMesh_wvrej")

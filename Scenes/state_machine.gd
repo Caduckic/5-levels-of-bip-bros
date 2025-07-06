@@ -43,7 +43,7 @@ func on_child_transition(state: State, new_state_name: String):
 		state_entered.emit(new_state_name)
 	else:
 		current_state = $Moving
-		current_state.nextState = new_state
+		current_state.next_state = new_state
 		state_entered.emit("moving")
 		
 	current_state.Enter()

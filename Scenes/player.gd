@@ -28,6 +28,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ACTION"):
 		action()
 
+func get_handheld() -> Node3D:
+	return $Handheld
+
 func go_up():
 	state_machine.go_up()
 
@@ -50,12 +53,18 @@ func begin_death():
 	GlobalVariables.has_handheld = false
 	$Handheld.transform = $HandheldMarkers/Table.transform
 	state_machine.change_to_state("dying")
+	
+func begin_punish():
+	pass
+	#$Handheld.transform = $HandheldMarkers/Table.transform
+	#state_machine.change_to_state("dying")
 
 func reset_to_forward():
 	state_machine.change_to_state("forward")
 
 func _on_state_machine_state_entered(state:  String) -> void:
 	state_entered.emit(state)
+	$StateMachine/Moving.current_state = state
 
 func _on_handheld_flashed() -> void:
 	flashed.emit()
